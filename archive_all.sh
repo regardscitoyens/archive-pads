@@ -4,7 +4,9 @@ mkdir -p html txt
 
 domains="https://quadpad.lqdn.fr"
 for domain in $domains; do
-  cat list txt/* | grep "$domain" | sed 's/ /\n/g' | grep "^$domain/[^/]*$" | sort | uniq > list
+  cat txt/* | grep "$domain" | sed 's/ /\n/g' | grep "^$domain/[^/]*$" | sort | uniq > listdomain
+  cat list listdomain | sort | uniq > list.tmp
+  mv list{.tmp,}
 done
 
 for pad in `cat list`; do
